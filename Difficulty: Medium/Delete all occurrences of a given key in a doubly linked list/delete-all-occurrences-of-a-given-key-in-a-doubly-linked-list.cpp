@@ -50,26 +50,26 @@ class Solution {
   public:
     void deleteAllOccurOfX(struct Node** head_ref, int x) {
         // Write your code here
-        struct Node*temp=*head_ref;
+        struct Node* temp=*head_ref;
         while(temp!=NULL){
             if(temp->data==x){
                 if(temp==*head_ref){
-                   *head_ref=temp->next; 
+                    *head_ref=temp->next;
                 }
-                struct Node*nextnode=temp->next;
-                struct Node*prevnode=temp->prev;
+                struct Node*tempprev=temp->prev;
+                struct Node*tempnext=temp->next;
                 
-                if(nextnode != NULL) nextnode->prev=prevnode;
-                if(prevnode != NULL) prevnode->next=nextnode;
+                if(tempnext) tempnext->prev=tempprev;
+                if(tempprev) tempprev->next=tempnext;
                 
                 free(temp);
-                temp=nextnode;
+                temp=temp->next;
             }
             else{
                 temp=temp->next;
             }
         }
-        // return *head_ref;
+        
     }
 };
 
