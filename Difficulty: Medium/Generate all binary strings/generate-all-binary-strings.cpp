@@ -27,10 +27,12 @@ public:
 
     vector<string> generateBinaryStrings(int N) {
         vector<string> result;
+        string current="";
         generateStrings(N, "", result);
         return result;
     }
 };
+
 
 
 //{ Driver Code Starts.
