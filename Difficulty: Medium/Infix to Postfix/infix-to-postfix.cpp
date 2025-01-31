@@ -6,56 +6,55 @@ using namespace std;
 
 // } Driver Code Ends
 
-
 class Solution {
-  public:
-    // Function to convert an infix expression to a postfix expression.
-    string infixToPostfix(string& s) {
-        string output;
-        stack<char> stack;
-        
-        for (char c : s) {
-            // If operand, add to output
-            if (isalnum(c)) {
-                output += c;
-            }
-            // If '(', push to stack
-            else if (c == '(') {
-                stack.push(c);
-            }
-            // If ')', pop and add to output until '(' is found
-            else if (c == ')') {
-                while (!stack.empty() && stack.top() != '(') {
-                    output += stack.top();
-                    stack.pop();
-                }
-                stack.pop(); // Remove '(' from stack
-            }
-            // Operator encountered
-            else {
-                while (!stack.empty() && precedence(stack.top()) >= precedence(c)) {
-                    output += stack.top();
-                    stack.pop();
-                }
-                stack.push(c);
-            }
-        }
-        
-        // Pop remaining operators in stack
-        while (!stack.empty()) {
-            output += stack.top();
-            stack.pop();
-        }
-        
-        return output;
-    }
-    
-    // Function to check precedence of operators
-    int precedence(char c) {
+     
+        // Your code here
+        int priority(char c) {
         if (c == '^') return 3;
         if (c == '*' || c == '/') return 2;
         if (c == '+' || c == '-') return 1;
         return 0;
+    }
+  public:
+    // Function to convert an infix expression to a postfix expression.
+   
+      string infixToPostfix(string& s) {
+        int i=0;
+        stack<char>st;
+        string ans="";
+        int n=s.length();
+        
+        while(i<n){    
+            if((s[i]>='A'&&s[i]<='Z')||(s[i]>='a'&&s[i]<='z')||(s[i]>='0'&&s[i]<='9')){
+               ans+=s[i]; //handling operands
+            }
+            else if(s[i]=='('){    //handling opening braces
+                st.push(s[i]);   
+            }
+            else if (s[i] == ')') {    //handling closing bracket
+                while (!st.empty() && st.top() != '(') {
+                    ans += st.top();
+                    st.pop();
+                }
+                if (!st.empty()) st.pop();  // Remove '(' from stack
+            } 
+            
+            else{       //handling operators
+                while(!st.empty() && priority(s[i]) <= priority(st.top())){
+                    ans+=st.top();
+                    st.pop();
+                }
+                st.push(s[i]);
+            }
+            i++;
+            
+        }
+        
+        while(!st.empty()){
+            ans+=st.top();
+            st.pop();
+        }
+        return ans;
     }
 };
 
