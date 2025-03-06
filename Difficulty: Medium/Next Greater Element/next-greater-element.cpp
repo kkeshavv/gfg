@@ -6,35 +6,24 @@ using namespace std;
 // } Driver Code Ends
 
 class Solution {
-  public:
-    // Function to find the next greater element for each element of the array.
+public:
     vector<int> nextLargerElement(vector<int>& arr) {
-        vector<int> ans;
-        stack<int> st;
         int n = arr.size();
-        
-        // Traverse the array from right to left
-        for (int i = n - 1; i >= 0; i--) {
-            // Pop elements from the stack that are less than or equal to arr[i]
+        vector<int> ans(n, -1); // Initialize vector with -1
+        stack<int> st;
+
+        for (int i = n - 1; i >= 0; i--) { // Traverse from right to left
             while (!st.empty() && st.top() <= arr[i]) {
                 st.pop();
             }
             
-            // If the stack is empty, the next greater element is -1
-            if (st.empty()) {
-                ans.push_back(-1);
-            } else {
-                // The top of the stack is the next greater element
-                ans.push_back(st.top());
+            if (!st.empty()) {
+                ans[i] = st.top(); // Assign the next greater element
             }
             
-            // Push the current element onto the stack
-            st.push(arr[i]);
+            st.push(arr[i]); // Push the current element onto the stack
         }
-        
-        // Since we've filled ans in reverse order, reverse it before returning
-        reverse(ans.begin(), ans.end());
-        
+
         return ans;
     }
 };
