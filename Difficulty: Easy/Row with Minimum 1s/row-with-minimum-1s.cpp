@@ -12,23 +12,22 @@ using namespace std;
 class Solution {
   public:
     int minRow(vector<vector<int>> &mat) {
-        int n = mat.size();
-        int m = mat[0].size();
-        int minCnt = INT_MAX;
-        int index = -1;
-
-        for (int i = 0; i < n; i++) {
-            int rowCnt = 0;
-            for (int j = 0; j < m; j++) {
-                rowCnt += mat[i][j];
+        // code here
+        int m=mat.size();
+        int n=mat[0].size();
+        int index=-1;
+        int mincount=INT_MAX;
+        for(int i=0;i<m;i++){
+            int rowcount=0;
+            for(int j=0;j<n;j++){
+                rowcount+=mat[i][j];
             }
-            if (rowCnt < minCnt) {
-                minCnt = rowCnt;
-                index = i;
+            if(rowcount<mincount){
+                mincount=rowcount;
+                index=i;
             }
         }
-
-        return index + 1; // convert from 0-based to 1-based index
+        return index+1;
     }
 };
 
