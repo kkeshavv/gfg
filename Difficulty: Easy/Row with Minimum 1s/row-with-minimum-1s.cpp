@@ -9,28 +9,50 @@ using namespace std;
 
 // User function Template for C++
 
+// class Solution {
+//   public:
+//     int minRow(vector<vector<int>> &mat) {
+//         // code here
+//         int m=mat.size();
+//         int n=mat[0].size();
+//         int index=-1;
+//         int mincount=INT_MAX;
+//         for(int i=0;i<m;i++){
+//             int rowcount=0;
+//             for(int j=0;j<n;j++){
+//                 rowcount+=mat[i][j];
+//             }
+//             if(rowcount<mincount){
+//                 mincount=rowcount;
+//                 index=i;
+//             }
+//         }
+//         return index+1;
+//     }
+// };
+
 class Solution {
-  public:
+public:
     int minRow(vector<vector<int>> &mat) {
-        // code here
         int m=mat.size();
         int n=mat[0].size();
+        int ans=INT_MAX;
         int index=-1;
-        int mincount=INT_MAX;
         for(int i=0;i<m;i++){
-            int rowcount=0;
+            int cnt=0;
             for(int j=0;j<n;j++){
-                rowcount+=mat[i][j];
+                if(mat[i][j]==1){
+                    cnt++;
+                }
             }
-            if(rowcount<mincount){
-                mincount=rowcount;
+            if(cnt<ans){
+                ans =cnt;
                 index=i;
             }
         }
         return index+1;
     }
 };
-
 
 //{ Driver Code Starts.
 
